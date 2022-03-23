@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="co.micol.prj.member.service.MemberMapper">
+	
+	
+	<select id="memberSelectList" resultType="MemberVO">
+		SELECT * FROM MEMBER 
+	</select>
+	
+	<select id="memberSelect" parameterType="MemberVO"
+						resultType="MemberVO">
+		SELECT * 
+		FROM MEMBER 
+		WHERE ID = #{id}
+	</select>
+	
+	<insert id="memberInsert" parameterType="MemberVO">
+		INSERT INTO MEMBER(ID, 
+						   PASSWORD, 
+						   NAME, 
+						   TEL, 
+						   ADDRESS)
+		VALUES(#{id}, 
+			   #{password}, 
+			   #{name}, 
+			   #{tel}, 
+			   #{address})
+	</insert>
+
+	<update id="memberUpdate" parameterType="MemberVO">
+		UPDATE MEMBER
+		<set>
+			<if test="password != null and password != ''">PASSWORD = #{password},</if>
+			<if test="name != null">NAME = #{name},</if>
+			<if test="tel != null">TEL = #{tel},</if>
+			<if test="address != null">ADDRESS = #{address},</if>
+		</set>
+		WHERE ID = #{id}
+	</update>
+	
+	<delete id="MemberDelete" parameterType="MemberVO">
+		DELETE 
+		FROM MEMBER 
+		WHERE ID = #{id}
+	</delete>
+	
+<!-- 	<delete id="MemberDelete" parameterType="MemberVO"> -->
+<!-- 		DELETE  -->
+<!-- 		FROM MEMBER -->
+<!-- 		<where> <trim></trim> -->
+<!-- 		<if> -->
+<!-- 		ID = #{id} -->
+<!-- 		</if> -->
+<!-- 		<if> -->
+<!-- 		and a = #{} -->
+<!-- 		</if> -->
+<!-- 		</where> -->
+<!-- 	</delete> -->
+	
+	
+
+</mapper>
